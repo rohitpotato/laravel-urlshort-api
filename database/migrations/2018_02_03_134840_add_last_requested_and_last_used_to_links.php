@@ -28,7 +28,8 @@ class AddLastRequestedAndLastUsedToLinks extends Migration
     public function down()
     {
         Schema::table('links', function (Blueprint $table) {
-            $table->dropColoumn('last_requested', 'last_used');
+
+            $table->dropColumn('last_requested', 'last_used');
         });
     }
 }
