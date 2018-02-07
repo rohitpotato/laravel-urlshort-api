@@ -19,4 +19,4 @@ Route::get('/', 'LinkController@show');
 
 Route::post('/check', 'LinkController@store')->middleware('ModifiesUrlRequestData'); //change this to post request to /
 
-Route::get('/stats', 'LinkStatsController@show');
+Route::get('/check/stats', 'LinkStatsController@show');
