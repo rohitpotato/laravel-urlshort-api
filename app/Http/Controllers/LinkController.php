@@ -13,9 +13,8 @@ class LinkController extends Controller
 
         $code = $request->code;
 
-        $link = Cache::rememberForever("link.{code}", function () use ($code) {
-
-            return Link::bycode($code)->first();
+        $link = Cache::rememberForever("link.{$code}", function () use ($code) {
+            return Link::byCode($code)->first();
         });
 
         if($link === null) {
