@@ -13,7 +13,7 @@ class LinkController extends Controller
 
         $code = $request->code;
 
-       $link = Link::bycode($link)->first();
+       $link = Link::bycode($code)->first();
 
         if($link === null) {
 
