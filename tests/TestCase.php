@@ -1,10 +1,28 @@
 <?php
 
-namespace Tests;
+use Illuminate\Support\Facades\Artisan;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends Laravel\Lumen\Testing\TestCase
 {
-    use CreatesApplication;
+    /**
+     * Creates the application.
+     *
+     * @return \Laravel\Lumen\Application
+     */
+    public function createApplication()
+    {
+        return require __DIR__.'/../bootstrap/app.php';
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        Artisan::call('migrate');
+    }
+
+    public function tearDown()
+    {
+        Artisan::call('migrate:reset');
+        parent::tearDown();
+    }
 }

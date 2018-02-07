@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Validator;
+use Closure;
 
 class ModifiesUrlRequestData
 {
@@ -17,23 +17,17 @@ class ModifiesUrlRequestData
     public function handle($request, Closure $next)
     {
         if (!$request->has('url')) {
-
-            return $next($request);
+            return $next($request);            
         }
 
-        $validator = \Validator::make($request->only('url'), [
+        $validator = Validator::make($request->only('url'), [
+            'url' => 'url'
+        ]);
 
-                'url' => 'url'
-
-            ]);
-
-        if($validator->fails()) {
-
+        if ($validator->fails()) {
             $request->merge([
-
-                   'url' => 'http://' . $request->url 
-
-                ]);
+                'url' => 'http://' . $request->url
+            ]);
         }
 
         return $next($request);

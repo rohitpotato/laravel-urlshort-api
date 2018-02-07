@@ -2,45 +2,41 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon;
 use App\Exceptions\CodeGenerationException;
+use App\Helpers\Math;
+use App\Traits\Eloquent\TouchesTimestamps;
+use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
-   protected $guarded = [];
+    use TouchesTimestamps;
+    
+    protected $fillable = [
+        'original_url',
+        'code',
+        'requested_count',
+        'used_count',
+        'last_requested',
+        'last_used'
+    ];
 
-   protected $dates = [
+    protected $dates = [
+        'last_requested', 'last_used'
+    ];
 
-         'last_requested',
-         'last_used',
-   ];
+    public function getCode()
+    {
+        if ($this->id === null) {
+            throw new CodeGenerationException;
+        }
 
-   public static function boot() {
+        return (new Math)->toBase($this->id);
+    }
 
-      parent::boot();
-
-      static::created( function ($link) {
-
-            $link->update(['last_requested' => Carbon\Carbon::now()]);
-
-      });
-   }
-
-   public function getCode()
-   {
-   		if ($this->id === null) {
-
-   			throw new CodeGenerationException;
-   		}	
-
-   		return (new Math)->tobase($this->id);
-   }
-
-   public static function bycode($code) {
-
-   		return static::where('code', $code);
-   }
+    public static function byCode($code)
+    {
+        return static::where('code', $code);
+    }
 
     public function shortenedUrl()
     {
