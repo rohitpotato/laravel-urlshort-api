@@ -19,7 +19,7 @@ class Controller extends BaseController
     		'data' => array_merge([
 
     			'original_url' => $link->original_url,
-    			'shortened_url' => 'http://localhost/urlnode/public/'.$link->code,
+    			'shortened_url' => $link->shortenedUrl,,
     			'code' => $link->code
     		], $merge)
 
