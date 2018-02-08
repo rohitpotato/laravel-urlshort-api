@@ -1,3 +1,17 @@
+Url shortener built on top with Lumen PHP Framework. Uses a node.js express server for 301 redirect for SEO optimization. Also, a client built with Vue.js.
+
+Uses a Taylor Otwell provided class for generating short url's with base 62 encoding which is currently not supported by PHP.
+
+Steps to Install:
+
+1. Git Clone the repository.
+2. Composer Install in the project folder.
+3. Set your database credentials and CLIENT_URL in the .env file.
+4. You are good to go.
+
+
+You can find the client for the api at: <a href = "https://github.com/rohitpotato/laravel-urlshort-vueclient">API CLIENT</a>
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
